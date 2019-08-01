@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/login.css' %}"/>
+</head>
+<body>
+    <p id="login">
+        <h1>Login</h1>
+        <form name="form1" action="" method="post">
+            {% csrf_token %}
+            <input type="text" required="required" placeholder="用户名" name="u">
+            <br>
+            <input type="password" required="required" placeholder="密码" name="p">
+            <button class="but" type="submit" onclick="form1.action='{% url 'blog:log_action' %}'">登录</button>
+            <button class="re" type="submit" onclick="form1.action='{% url 'blog:regist_action' %}'">注册</button>
+        </form>
+    </p>
+
+</body>
+</html>

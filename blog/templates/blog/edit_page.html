@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit_page</title>
+    <style type="text/css">
+        textarea{
+            overflow:scroll;
+        }
+    </style>
+</head>
+<body style="background-image: url({% static 'blog/images/edit.jpg' %});
+        background-size:100% 200%;background-repeat:no-repeat;">
+<form action="{% url 'blog:edit_action' %}" method="post">
+    {% csrf_token %}
+
+    {% if article %}
+        <input type="hidden" name="article_id" value="{{ article.id }}">
+
+    <p>文章标题：</p>
+    <input type="text" style="background-color:rgba(166,228,255,0.52)" name="title" value={{ article.title }}>
+    <br>
+    <p>文章内容：</p>
+    <textarea style="background-color:rgba(166,228,255,0.52)" name="content" rows="30" cols="100" >{{ article.content }}</textarea>
+    <br>
+
+    {% else %}
+        <input type="hidden" name="article_id" value="0">
+     <p>文章标题：</p>
+    <input type="text" name="title" >
+    <br><br>
+    <p>文章内容：</p>
+    <textarea name="content" rows="10" cols="50"></textarea>
+    <br>
+    {% endif %}
+    <input type="submit" value="完成" >
+</form>
+<br><br>
+<a href="{% url 'blog:index' %}">返回主页</a>
+
+</body>
+</html>
